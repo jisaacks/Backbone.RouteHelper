@@ -3,15 +3,8 @@ global._        = require "underscore"
 global.Backbone = require "./backbone"
 sinon           = require "sinon"
 stubber         = require "backbone.history_stub"
-qs              = require "qs"
 
 require "../lib/backbone.route_helper"
-
-_.extend Backbone.RouteHelper.prototype, {
-  _parseQuery: (str) -> qs.parse(str)
-  _buildQuery: (obj) -> qs.stringify(obj)
-}
-
 
 class SpecRouter extends Backbone.Router
   routes:
