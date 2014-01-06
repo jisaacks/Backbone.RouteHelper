@@ -1,0 +1,24 @@
+{
+  "name" : "backbone.route_helper",
+  "version" : "0.0.0",
+  "description" : "Build and manipulate Backbone routes",
+  "author" : {
+    "name" : "JD Isaacks",
+    "email" : "jd@jisaacks.com",
+    "url" : "http://github.com/jisaacks"
+  },
+  "main": "./lib/backbone.route_helper",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/emcien/Backbone.RouteHelper.git"
+  },
+  "dependencies" : {
+    "underscore" : ">=1.4",
+    "backbone"   : ">=0.9"
+  },
+  "devDependencies": {
+    "sinon"                 : ">=1.6",
+    "backbone.history_stub" : ">=0.0",
+    "qs"                    : ">=0.6"
+  }
+}
