@@ -61,7 +61,7 @@ var route = Backbone.RouteHelper.modify().query({page: 3}).route();
 console.log(route); // user/1/comments?page=3
 ```
 
-**The built in query parser in Backbone.RouteHelper is very weak and it is recommended you use your own:**
+**A note On query parsing:** By default Backbone.RouteHelper expects a global to be present called **ns**, which is an instance of [node-querystring](https://github.com/visionmedia/node-querystring). This repo includes a build of that project called `qs.js` all you would need to do is include that script before the route helper script. Alternatively, you can use your own query parser by overriding a couple methods: 
 
 ```javascript
 _.extend(Backbone.RouteHelper.prototype, {

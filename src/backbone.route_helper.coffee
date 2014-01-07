@@ -146,17 +146,10 @@ class Backbone.RouteHelper
     handler.route
 
   _parseQuery: (str) ->
-    qry = {}
-    parts = str.split("&")
-    _.each parts, (part) ->
-      [key, val] = part.split("=")
-      qry[ decodeURIComponent(key) ] = decodeURIComponent(val)
-    qry
+    qs.parse(str)
 
   _buildQuery: (obj) ->
-    parts = _.map obj, (val, key) ->
-      encodeURIComponent(key) + "=" + encodeURIComponent(val)
-    parts.join("&")
+    qs.stringify(obj)
 
   _buildRoute: (route, args) ->
     hasKeys = _.keys args

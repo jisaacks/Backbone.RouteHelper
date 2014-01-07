@@ -1,6 +1,7 @@
 # include reauired libraries
 global._        = require "underscore"
 global.Backbone = require "./backbone"
+global.qs       = require "../lib/qs"
 sinon           = require "sinon"
 stubber         = require "backbone.history_stub"
 
