@@ -41,7 +41,7 @@ var route = Backbone.RouteHelper.modify("posts").route();
 console.log(route); // user/21/posts
 ```
 
-#### using queries
+#### Using Queries
 
 Setting:
 
@@ -83,6 +83,10 @@ var route = Backbone.RouteHelper.modify("post")
   .route();
 console.log(route); // user/2/posts/7?show_replies=true
 ```
+
+### Installation
+
+Include the **qs.js** and **backbone.route_helper.js** scripts loacated under **lib** into your project. Alternatvely you can skip **qs.js** and use your own parser. [See above](https://github.com/emcien/Backbone.RouteHelper#using-queries) for details on how.
 
 ### Testing
 
