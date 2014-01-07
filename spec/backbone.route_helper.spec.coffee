@@ -9,12 +9,13 @@ require "../lib/backbone.route_helper"
 
 class SpecRouter extends Backbone.Router
   routes:
-    ""                                        : "root"
-    "i/am/jacks/:jacks"                       : "jacks"
-    "paper/street/:soap"                      : "soap"
-    "the/:nth/rule/of/fight/club/is/*rule"    : "rule"
-    "his/name/is/:first/:last"                : "funeral"
-    "fight/club/:first/project/mayhem/:last"  : "order"
+    ""                                              : "root"
+    "i/am/jacks/:jacks"                             : "jacks"
+    "paper/street/:soap"                            : "soap"
+    "the/:nth/rule/of/fight/club/is/*rule"          : "rule"
+    "his/name/is/:first/:last"                      : "funeral"
+    "fight/club/:first/project/mayhem/:last"        : "order"
+    "on/your/first/night/fighting/isnt(/:optional)" : "optional"
 
 router = new SpecRouter()
 stubber.stub()
@@ -71,5 +72,13 @@ describe "Backbone.RouteHelper", ->
     nv RH.build("jacks").params(jacks: "foot").query(show: "all").route()
     route = RH.modify().params(jacks: "hand").build().query().route()
     expect(route).toEqual("i/am/jacks/hand")
+
+  it "works with optional params", ->
+    # with optional param
+    rt1 = RH.build("optional").params(optional: 2).route()
+    expect(rt1).toEqual("on/your/first/night/fighting/isnt/2")
+    # without optional params
+    rt2 = RH.build("optional").route()
+    expect(rt2).toEqual("on/your/first/night/fighting/isnt")
 
 Backbone.history.stop()
