@@ -61,7 +61,7 @@ var route = Backbone.RouteHelper.modify().query({page: 3}).route();
 console.log(route); // user/1/comments?page=3
 ```
 
-**A note On query parsing:** By default Backbone.RouteHelper expects a global to be present called **ns**, which is an instance of [node-querystring](https://github.com/visionmedia/node-querystring). This repo includes a build of that project called `qs.js` all you would need to do is include that script before the route helper script. Alternatively, you can use your own query parser by overriding a couple methods: 
+**A note on query parsing:** By default Backbone.RouteHelper expects a global to be present called **ns**, which is an instance of [node-querystring](https://github.com/visionmedia/node-querystring). This repo includes a build of that project called `qs.js` all you would need to do is include that script before the route helper script. Alternatively, you can use your own query parser by overriding a couple methods: 
 
 ```javascript
 _.extend(Backbone.RouteHelper.prototype, {
@@ -86,7 +86,7 @@ console.log(route); // user/2/posts/7?show_replies=true
 
 ### Installation
 
-Include the **qs.js** and **backbone.route_helper.js** scripts loacated under **lib** into your project. Alternatvely you can skip **qs.js** and use your own parser. [See above](https://github.com/emcien/Backbone.RouteHelper#using-queries) for details on how.
+Include the **qs.js** and **backbone.route_helper.js** scripts loacated under **lib** into your project respectively. Alternatvely you can skip **qs.js** and use your own parser. [See above](https://github.com/emcien/Backbone.RouteHelper#using-queries) for details on how.
 
 ### Testing
 
