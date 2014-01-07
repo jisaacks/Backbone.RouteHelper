@@ -1,6 +1,6 @@
 optionalParam        = /\((.*?)\)/g
 namesPattern         = /[\:\*]([^\:\?\/\)]+)/g
-optionalNamesPattern = /\(\/[\:\*]([^\:\?\/]+)\)/g
+optionalNamesPattern = /\(\/[^\:\?\/\)]*[\:\*]([^\:\?\/]+)\)/g
 
 
 # Monkey patch Backbone.Router to store the necessary 
@@ -173,8 +173,8 @@ class Backbone.RouteHelper
     _.each optKeys, (key) =>
       val = args[key]
       if val
-        re = new RegExp "\\(\/:#{key}\\)"
-        template = template.replace re, "/#{val}"
+        re = new RegExp "\\(\/([^\:\?\/\)]*):#{key}\\)"
+        template = template.replace re, "/$1#{val}"
 
     # Remove any missing optional values from template
     template = template.replace optionalParam, ''

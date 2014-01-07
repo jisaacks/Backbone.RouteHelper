@@ -16,6 +16,7 @@ class SpecRouter extends Backbone.Router
     "his/name/is/:first/:last"                      : "funeral"
     "fight/club/:first/project/mayhem/:last"        : "order"
     "on/your/first/night/fighting/isnt(/:optional)" : "optional"
+    "another(/thats:optional)"                      : "prefixed"
 
 router = new SpecRouter()
 stubber.stub()
@@ -80,5 +81,13 @@ describe "Backbone.RouteHelper", ->
     # without optional params
     rt2 = RH.build("optional").route()
     expect(rt2).toEqual("on/your/first/night/fighting/isnt")
+
+  it "works with prefixed optional params", ->
+    # with optional param
+    rt1 = RH.build("prefixed").params(optional: 2).route()
+    expect(rt1).toEqual("another/thats2")
+    # without optional params
+    rt2 = RH.build("prefixed").route()
+    expect(rt2).toEqual("another")
 
 Backbone.history.stop()
