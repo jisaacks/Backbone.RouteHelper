@@ -79,7 +79,7 @@ class Backbone.RouteHelper
     @current().modify(name)
 
   @route: ->
-    @current().route()
+    @current().modify().query().route()
 
   @build: (name=null) ->
     name ||= RouteHelper.current()._options.route.name

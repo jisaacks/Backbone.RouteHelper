@@ -31,8 +31,8 @@ describe "Backbone.RouteHelper", ->
     nv ""
 
   it "tracks the current route", ->
-    route = "i/am/jacks/colon"
-    nv "i/am/jacks/colon"
+    route = "i/am/jacks/colon?q=1"
+    nv route
     expect(RH.route()).toEqual(route)
 
   it "can build a route", ->
