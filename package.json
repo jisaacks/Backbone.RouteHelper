@@ -13,7 +13,7 @@
     "url": "https://github.com/emcien/Backbone.RouteHelper.git"
   },
   "dependencies" : {
-    "underscore" : ">=1.4",
+    "underscore" : ">=1.5",
     "backbone"   : "jashkenas/backbone"
   },
   "devDependencies": {
