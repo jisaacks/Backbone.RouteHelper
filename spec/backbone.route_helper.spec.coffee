@@ -64,14 +64,14 @@ describe "Backbone.RouteHelper", ->
     route = RH.build("root").query(q: "tyler").route()
     expect(route).toEqual("?q=tyler")
 
-  it "can update params while maintaining query", ->
+  it "includes previous query when modifying and query method called", ->
     nv RH.build("jacks").params(jacks: "foot").query(show: "all").route()
-    route = RH.modify().params(jacks: "hand").route()
+    route = RH.modify().params(jacks: "hand").query().route()
     expect(route).toEqual("i/am/jacks/hand?show=all")
 
-  it "can update params and clear query", ->
+  it "doesn't use query when modifying and no call to query method", ->
     nv RH.build("jacks").params(jacks: "foot").query(show: "all").route()
-    route = RH.modify().params(jacks: "hand").build().query().route()
+    route = RH.modify().params(jacks: "hand").route()
     expect(route).toEqual("i/am/jacks/hand")
 
   it "works with optional params", ->

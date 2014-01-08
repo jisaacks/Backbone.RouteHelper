@@ -59,6 +59,9 @@ Backbone.History.prototype.loadUrl = (fragmentOverride) ->
   # If query preset, set it too.
   if query
     helper.query(query)
+    # Store the query, but don't set it to be used
+    # unless user manually calls .query()
+    helper._useQuery = false
 
   @__currentRouteHelper = helper
 
@@ -89,12 +92,13 @@ class Backbone.RouteHelper
     @_options.route = @_getRouteByName(routeName)
     @_options.params = {}
     @_options.query = {}
+    @_useQuery = false
 
 
   # Kicker
   route: ->
     _rt = @_buildRoute @_options.route, @_options.params
-    if _.values(@_options.query || {}).length
+    if _.values(@_options.query || {}).length && @_useQuery
       _rt = @_attachQuery _rt, @_options.query
     _rt
 
@@ -117,6 +121,7 @@ class Backbone.RouteHelper
     @
 
   query: (args) ->
+    @_useQuery = true
     args = @_parseQuery(args) if typeof args is "string"
     switch @_buildType
       when "build"
