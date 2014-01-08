@@ -45,12 +45,12 @@ describe "Backbone.RouteHelper", ->
     expect(route).toEqual("paper/street/soap")
 
   it "works with splats", ->
-      rt = RH.build("rule").params({
-        nth: "first"
-        rule: "do/not/talk/about/fight/club"
-      }).route()
-      should = "the/first/rule/of/fight/club/is/do/not/talk/about/fight/club"
-      expect(rt).toEqual(should)
+    rt = RH.build("rule").params({
+      nth: "first"
+      rule: "do/not/talk/about/fight/club"
+    }).route()
+    should = "the/first/rule/of/fight/club/is/do/not/talk/about/fight/club"
+    expect(rt).toEqual(should)
 
   it "can swap routes with same params", ->
     rh = RH.build("order").params({
