@@ -25,6 +25,9 @@ Backbone.Router.prototype.route = (route, name, callback) ->
     # set name
     route.name = name
 
+    route.helperId = @routeHelperId
+    route.routerClass = @constructor.name
+
   origRouteMethod.apply this, [route, name, callback]
 
 
@@ -146,8 +149,26 @@ class Backbone.RouteHelper
     route + "?" + @_buildQuery query
 
   _getRouteByName: (name) ->
+    # Try to just get route by name
     handler = _.find Backbone.history.handlers, (handler) ->
       handler.route.name == name
+    
+    # If no handler found yet,
+    # Try to get handler by name prefixed with router's routeHelperId
+    unless handler
+      handler = _.find Backbone.history.handlers, (handler) ->
+        name == "#{handler.route.helperId}:#{handler.route.name}"
+    
+    # If no handler found yet,
+    # Try to get handler by name prefixed with router's class name
+    unless handler
+      handler = _.find Backbone.history.handlers, (handler) ->
+        name == "#{handler.route.routerClass}:#{handler.route.name}"
+    
+    # If we still haven't found a route,
+    unless handler
+      throw "No route found for #{name}"
+    
     handler.route
 
   _parseQuery: (str) ->

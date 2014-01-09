@@ -19,6 +19,32 @@ class SpecRouter extends Backbone.Router
     "another(/thats:optional)"                      : "prefixed"
 
 router = new SpecRouter()
+
+class AmbiguousRouterA extends Backbone.Router
+  routes:
+    "ambiguous/a" : "ambiguous"
+aaRouter = new AmbiguousRouterA()
+
+class AmbiguousRouterB extends Backbone.Router
+  routes:
+    "ambiguous/b" : "ambiguous"
+abRouter = new AmbiguousRouterB()
+
+namespaceA = {}
+class namespaceA.AmbiguousRouter extends Backbone.Router
+  routeHelperId: "nsa"
+  routes:
+    "namespaced/a" : "namespaced"
+nsaRouter = new namespaceA.AmbiguousRouter()
+
+namespaceB = {}
+class namespaceB.AmbiguousRouter extends Backbone.Router
+  routeHelperId: "nsb"
+  routes:
+    "namespaced/b" : "namespaced"
+nsbRouter = new namespaceB.AmbiguousRouter()
+
+
 stubber.stub()
 Backbone.history.start()
 
@@ -89,5 +115,21 @@ describe "Backbone.RouteHelper", ->
     # without optional params
     rt2 = RH.build("prefixed").route()
     expect(rt2).toEqual("another")
+
+  it "throws an error when cannot find route", ->
+    expect(-> RH.build("random string").route())
+      .toThrow("No route found for random string")
+
+  it "can disambiguate by router's class name", ->
+    rt1 = RH.build("AmbiguousRouterA:ambiguous").route()
+    expect(rt1).toEqual("ambiguous/a")
+    rt2 = RH.build("AmbiguousRouterB:ambiguous").route()
+    expect(rt2).toEqual("ambiguous/b")
+
+  it "can disambiguate by router's routeHelperId", ->
+    rt1 = RH.build("nsa:namespaced").route()
+    expect(rt1).toEqual("namespaced/a")
+    rt2 = RH.build("nsb:namespaced").route()
+    expect(rt2).toEqual("namespaced/b")
 
 Backbone.history.stop()
