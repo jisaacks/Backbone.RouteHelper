@@ -131,6 +131,9 @@ class Backbone.RouteHelper
         @_options.query = args
       when "modify"
         _.extend(@_options.query, args)
+    _.each @_options.query, (v,k) =>
+      if v == undefined || v == ""
+        delete @_options.query[k]
     @
 
   clone: ->

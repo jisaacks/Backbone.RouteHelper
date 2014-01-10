@@ -132,4 +132,9 @@ describe "Backbone.RouteHelper", ->
     rt2 = RH.build("nsb:namespaced").route()
     expect(rt2).toEqual("namespaced/b")
 
+  it "clears keys with no values", ->
+    nv RH.build("root").query(q:"soap",p:"1").route()
+    rt = RH.modify().query(p:undefined).route()
+    expect(rt).toEqual("?q=soap")
+
 Backbone.history.stop()
