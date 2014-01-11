@@ -132,6 +132,23 @@ describe "Backbone.RouteHelper", ->
     rt2 = RH.build("nsb:namespaced").route()
     expect(rt2).toEqual("namespaced/b")
 
+  it "knows which ambiguous route to use when modifying current", ->
+    nv RH.build("nsa:namespaced").route()
+    rt1 = RH.modify().query(q:1).route()
+    expect(rt1).toEqual("namespaced/a?q=1")
+    
+    nv RH.build("nsb:namespaced").route()
+    rt2 = RH.modify().query(q:1).route()
+    expect(rt2).toEqual("namespaced/b?q=1")
+
+    nv RH.build("AmbiguousRouterA:ambiguous").route()
+    rt3 = RH.modify().query(q:1).route()
+    expect(rt3).toEqual("ambiguous/a?q=1")
+
+    nv RH.build("AmbiguousRouterB:ambiguous").route()
+    rt4 = RH.modify().query(q:1).route()
+    expect(rt4).toEqual("ambiguous/b?q=1")
+
   it "clears keys with no values", ->
     nv RH.build("root").query(q:"soap",p:"1").route()
     rt = RH.modify().query(p:undefined).route()
