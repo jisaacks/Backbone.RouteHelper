@@ -154,4 +154,19 @@ describe "Backbone.RouteHelper", ->
     rt = RH.modify().query(p:undefined).route()
     expect(rt).toEqual("?q=soap")
 
+  it "doesn't break when a regex route is triggered", ->
+    router.route(/seenit\d+times/,"regex")
+    nv "seenit12times"
+    expect(Backbone.history.fragment).toEqual("seenit12times")
+
+  it "throws an error when constructing a route without a template", ->
+    router.route(/watchedit\d+times/,"regex")
+    nv "watchedit21times"
+    expect(-> RH.route()).toThrow("No template found for #{/watchedit\d+times/}")
+
+  it "doesn't break when an unnamed route is triggered", ->
+    router.route "no/name", -> null
+    nv "no/name"
+    expect(RH.route()).toEqual("no/name")
+
 Backbone.history.stop()

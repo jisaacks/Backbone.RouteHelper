@@ -23,7 +23,7 @@ Backbone.Router.prototype.route = (route, name, callback) ->
     # Set all param names
     route.allParamNames = _.map template.match(namesPattern), (n) -> n.substring(1)
     # set name
-    route.name = name
+    route.name = name unless typeof name == "function"
 
     route.helperId = @routeHelperId
     route.routerClass = @constructor.name
@@ -188,6 +188,11 @@ class Backbone.RouteHelper
     qs.stringify(obj)
 
   _buildRoute: (route, args) ->
+    template = route.template
+
+    unless template?
+      throw "No template found for #{route}"
+
     hasKeys = _.keys args
     allKeys = route.allParamNames
     optKeys = route.optionalParamNames
@@ -196,8 +201,6 @@ class Backbone.RouteHelper
 
     if misKeys.length
       throw "Missing required params: #{misKeys.join ', '} for #{route.name}"
-
-    template = route.template
 
     # Insert required values into template
     _.each reqKeys, (key) =>
