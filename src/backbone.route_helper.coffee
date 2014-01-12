@@ -54,8 +54,7 @@ Backbone.History.prototype.loadUrl = (fragmentOverride) ->
   params = _.object route.allParamNames, params
 
   # Create a new route helper
-  prefix = route.helperId || route.routerClass
-  helper = Backbone.RouteHelper.build "#{prefix}:#{route.name}"
+  helper = Backbone.RouteHelper.fromRoute(route)
   
   # Set the params to the current params
   helper.build().params(params)
@@ -90,6 +89,13 @@ class Backbone.RouteHelper
     rh = new RouteHelper(name)
     rh.build()
     rh
+
+  @routeName: (route) ->
+    prefix = route.helperId || route.routerClass
+    "#{prefix}:#{route.name}"
+
+  @fromRoute: (route) ->
+    new RouteHelper @routeName(route)
 
   constructor: (routeName) ->
     @_options = {}
@@ -138,8 +144,7 @@ class Backbone.RouteHelper
     @
 
   clone: ->
-    prefix = @_options.route.helperId || @_options.route.routerClass
-    _clone = new RouteHelper "#{prefix}:#{@_options.route.name}"
+    _clone = RouteHelper.fromRoute(@_options.route)
     _clone._options.params = _.clone @_options.params
     if @_options.query
       _clone._options.query = _.clone @_options.query
