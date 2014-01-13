@@ -169,4 +169,8 @@ describe "Backbone.RouteHelper", ->
     nv "no/name"
     expect(RH.route()).toEqual("no/name")
 
+  it "can navigate", ->
+    RH.build("jacks").params(jacks: "lack_of_surprise").navigate(true)
+    expect(RH.route()).toEqual("i/am/jacks/lack_of_surprise")
+
 Backbone.history.stop()

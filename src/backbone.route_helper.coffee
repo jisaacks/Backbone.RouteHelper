@@ -112,6 +112,9 @@ class Backbone.RouteHelper
       _rt = @_attachQuery _rt, @_options.query
     _rt
 
+  navigate: (options) ->
+    Backbone.history.navigate(@route(), options)
+
   build: (name=null) ->
     if name
       @_options.route = @_getRouteByName(name)
