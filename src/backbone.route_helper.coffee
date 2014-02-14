@@ -112,6 +112,9 @@ class Backbone.RouteHelper
       _rt = @_attachQuery _rt, @_options.query
     _rt
 
+  toString: ->
+    @route()
+
   navigate: (options) ->
     Backbone.history.navigate(@route(), options)
 

@@ -173,4 +173,8 @@ describe "Backbone.RouteHelper", ->
     RH.build("jacks").params(jacks: "lack_of_surprise").navigate(true)
     expect(RH.route()).toEqual("i/am/jacks/lack_of_surprise")
 
+  it "builds route when coerced into string", ->
+    rt = RH.build("jacks").params(jacks: "cold_sweat")
+    expect("#{rt}").toEqual(rt.route())
+
 Backbone.history.stop()
