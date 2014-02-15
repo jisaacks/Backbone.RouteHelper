@@ -177,4 +177,8 @@ describe "Backbone.RouteHelper", ->
     rt = RH.build("jacks").params(jacks: "cold_sweat")
     expect("#{rt}").toEqual(rt.route())
 
+  it "can be passed to router.navigate without being converted to a string", ->
+    nv RH.build("jacks").params(jacks: "revenge")
+    expect(RH.route()).toEqual("i/am/jacks/revenge")
+
 Backbone.history.stop()

@@ -115,6 +115,9 @@ class Backbone.RouteHelper
   toString: ->
     @route()
 
+  replace: (args...) ->
+    @route().replace(args...)
+
   navigate: (options) ->
     Backbone.history.navigate(@route(), options)
 
