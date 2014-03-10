@@ -81,6 +81,9 @@ class Backbone.RouteHelper
   @modify: (name=null) ->
     @current().modify(name)
 
+  @omit: (keys...) ->
+    @current().omit(keys...)
+
   @route: ->
     @current().modify().query().route()
 
@@ -150,6 +153,11 @@ class Backbone.RouteHelper
     _.each @_options.query, (v,k) =>
       if v == undefined || v == ""
         delete @_options.query[k]
+    @
+
+  omit: (keys...) ->
+    @_useQuery = true
+    @_options.query = _.omit @_options.query, keys...
     @
 
   clone: ->

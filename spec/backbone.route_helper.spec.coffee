@@ -181,4 +181,9 @@ describe "Backbone.RouteHelper", ->
     nv RH.build("jacks").params(jacks: "revenge")
     expect(RH.route()).toEqual("i/am/jacks/revenge")
 
+  it "can omit keys from query string", ->
+    nv RH.build("jacks").params(jacks: "omition").query(a:"one", b:"two")
+    RH.omit("a").navigate(true)
+    expect(RH.route()).toEqual("i/am/jacks/omition?b=two")
+
 Backbone.history.stop()
