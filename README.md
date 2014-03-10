@@ -88,7 +88,7 @@ console.log(route); // user/2/posts/7?show_replies=true
 
 Include the **qs.js** and **backbone.route_helper.js** scripts loacated under **lib** into your project respectively. Alternatvely you can skip **qs.js** and use your own parser. [See above](https://github.com/emcien/Backbone.RouteHelper#using-queries) for details on how.
 
-**warning:** This relies on future features of Backbone.js. [More info here](https://github.com/jashkenas/backbone/pull/2890) You can use the master branch of backbone.js to get them.
+**warning:** This relies on Backbone.js version 1.1.1 or above.
 
 ### Testing
 
