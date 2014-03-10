@@ -186,4 +186,9 @@ describe "Backbone.RouteHelper", ->
     RH.omit("a").navigate(true)
     expect(RH.route()).toEqual("i/am/jacks/omition?b=two")
 
+  it "can pick keys from query string", ->
+    nv RH.build("jacks").params(jacks: "pick").query(a:"one", b:"two")
+    RH.pick("a").navigate(true)
+    expect(RH.route()).toEqual("i/am/jacks/pick?a=one")
+
 Backbone.history.stop()

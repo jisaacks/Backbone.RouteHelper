@@ -84,6 +84,9 @@ class Backbone.RouteHelper
   @omit: (keys...) ->
     @current().omit(keys...)
 
+  @pick: (keys...) ->
+    @current().pick(keys...)
+
   @route: ->
     @current().modify().query().route()
 
@@ -158,6 +161,11 @@ class Backbone.RouteHelper
   omit: (keys...) ->
     @_useQuery = true
     @_options.query = _.omit @_options.query, keys...
+    @
+
+  pick: (keys...) ->
+    @_useQuery = true
+    @_options.query = _.pick @_options.query, keys...
     @
 
   clone: ->
