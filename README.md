@@ -2,6 +2,10 @@
 
 Build and manipulate Backbone routes
 
+### API
+
+[Wiki](https://github.com/emcien/Backbone.RouteHelper/wiki/API)
+
 ### Usage
 
 Define your Backbone routes like you normally would:
