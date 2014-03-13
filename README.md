@@ -1,6 +1,6 @@
 # Backbone.RouteHelper
 
-Build and manipulate Backbone routes
+Build and manipulate Backbone routes. _Requires Backbone.js version 1.1.1 or above._
 
 ### API
 
